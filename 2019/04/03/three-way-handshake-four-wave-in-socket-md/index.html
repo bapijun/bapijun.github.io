@@ -5,16 +5,26 @@
   
 
   
-  <title>bapijun的博客</title>
+  <title>three_way_handshake_four_wave_in_socket.md | bapijun的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="bapijun的博客">
-<meta property="og:url" content="https://bapijun.github.io/index.html">
+  <meta name="description" content="三次握手四次挥手发生在socket的哪个阶段=== 最近刚好在看网络编程,写服务器socket函数,刚好看到socket连接,想到了之前一直强调的三次握手四次挥手的问题.就找了一些资料写了这篇文章.正文其实很简单,就五张图片.其中前两张来自csapp,后两张来自网络,最后一张来自计算机网络.其中计算机网络(美国人写得第五版)描述的最清楚,感兴趣的话可以直接翻看原文.其中要注意四次挥手并不能保证两个">
+<meta name="keywords" content="计算机网络 socket">
+<meta property="og:type" content="article">
+<meta property="og:title" content="three_way_handshake_four_wave_in_socket.md">
+<meta property="og:url" content="https://bapijun.github.io/2019/04/03/three-way-handshake-four-wave-in-socket-md/index.html">
 <meta property="og:site_name" content="bapijun的博客">
+<meta property="og:description" content="三次握手四次挥手发生在socket的哪个阶段=== 最近刚好在看网络编程,写服务器socket函数,刚好看到socket连接,想到了之前一直强调的三次握手四次挥手的问题.就找了一些资料写了这篇文章.正文其实很简单,就五张图片.其中前两张来自csapp,后两张来自网络,最后一张来自计算机网络.其中计算机网络(美国人写得第五版)描述的最清楚,感兴趣的话可以直接翻看原文.其中要注意四次挥手并不能保证两个">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://bapijun.github.io/2019/04/03/three-way-handshake-four-wave-in-socket-md/socket/socket.png">
+<meta property="og:image" content="https://bapijun.github.io/2019/04/03/three-way-handshake-four-wave-in-socket-md/socket/listen_accept.png">
+<meta property="og:image" content="https://bapijun.github.io/2019/04/03/three-way-handshake-four-wave-in-socket-md/socket/three_hand.png">
+<meta property="og:image" content="https://bapijun.github.io/2019/04/03/three-way-handshake-four-wave-in-socket-md/socket/four_wave.png">
+<meta property="og:image" content="https://bapijun.github.io/2019/04/03/three-way-handshake-four-wave-in-socket-md/socket/tcpautomachine.png">
+<meta property="og:updated_time" content="2019-04-03T14:00:25.051Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="bapijun的博客">
+<meta name="twitter:title" content="three_way_handshake_four_wave_in_socket.md">
+<meta name="twitter:description" content="三次握手四次挥手发生在socket的哪个阶段=== 最近刚好在看网络编程,写服务器socket函数,刚好看到socket连接,想到了之前一直强调的三次握手四次挥手的问题.就找了一些资料写了这篇文章.正文其实很简单,就五张图片.其中前两张来自csapp,后两张来自网络,最后一张来自计算机网络.其中计算机网络(美国人写得第五版)描述的最清楚,感兴趣的话可以直接翻看原文.其中要注意四次挥手并不能保证两个">
+<meta name="twitter:image" content="https://bapijun.github.io/2019/04/03/three-way-handshake-four-wave-in-socket-md/socket/socket.png">
   
     <link rel="alternate" href="/atom.xml" title="bapijun的博客" type="application/atom+xml">
   
@@ -65,9 +75,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-three-way-handshake-four-wave-in-socket-md" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-three-way-handshake-four-wave-in-socket-md" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/04/03/three-way-handshake-four-wave-in-socket-md/" class="article-date">
   <time datetime="2019-04-03T13:58:31.000Z" itemprop="datePublished">2019-04-03</time>
@@ -80,8 +88,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/03/three-way-handshake-four-wave-in-socket-md/">three_way_handshake_four_wave_in_socket.md</a>
+    <h1 class="article-title" itemprop="name">
+      three_way_handshake_four_wave_in_socket.md
     </h1>
   
 
@@ -114,77 +122,19 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-overview-for-fpm" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/03/25/overview-for-fpm/" class="article-date">
-  <time datetime="2019-03-25T14:07:46.000Z" itemprop="datePublished">2019-03-25</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/25/overview-for-fpm/">从浏览器输入URL会发生什么2?FPM(FastCGI Process Manager)概述</a>
-    </h1>
+    <a href="/2019/03/25/overview-for-fpm/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">从浏览器输入URL会发生什么2?FPM(FastCGI Process Manager)概述</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p>在之前的文章中我们稍微提到了了cgi和fastcgi在服务器端响应请求.作为一个php程序员,必然要学习fpm,在现在lnmp架构下fpm几乎成了必然使用的地方,所以写下本片博客,作为一个概述,粗略的讨论fpm.更详细的内容,请参考<a href="https://php-fpm.org/" target="_blank" rel="noopener">官网</a>.</p>
-<hr>
-<p>===</p>
-<h3 id="cgi-AND-fast-CGI"><a href="#cgi-AND-fast-CGI" class="headerlink" title="cgi AND fast CGI"></a>cgi AND fast CGI</h3><p>首先我们给出一个cgi和fast cgi的定义:</p>
-<ul>
-<li>CGI:是 Web Server 与 Web Application 之间数据交换的一种协议.</li>
-<li>FastCGI:同 CGI，是一种通信协议，但比 CGI 在效率上做了一些优化。同样，SCGI 协议与 FastCGI 类似。</li>
-</ul>
-<p>在服务器请求中他的作用如下图:</p>
-<p><img src="https://img-blog.csdn.net/20181002220925469?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTE4MjI1MTY=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="cgi"></p>
-<p>FastCGI是一种让交互程序与Web服务器通信的协议。FastCGI是早期通用网关接口（CGI）的增强版本。</p>
-<h3 id="fpm"><a href="#fpm" class="headerlink" title="fpm"></a>fpm</h3><p>聊完了cgi和fastcgi,我们来说说phper程序员经常接触的fpm.我们先看一看官方的文档中提到的<a href="https://secure.php.net/manual/zh/install.fpm.php" target="_blank" rel="noopener">定义</a>.</p>
-<p>PHP-FPM (FastCGI Process Manager) is an alternative PHP FastCGI implementation with some additional features useful for sites of any size, especially busier sites.</p>
-<p>换成汉语FPM（FastCGI 进程管理器）用于替换 PHP FastCGI的一个实现,并附带了大量对于高负载网站是非常有用的附加功能，(ps这个翻译和官方翻译不一样,我觉得这样翻译会更合适,官方的汉化翻译有明显不对劲).</p>
-<p>它具有一下特点:</p>
-<ul>
-<li>支持平滑停止/启动的高级进程管理功能；</li>
-<li>可以工作于不同的 uid/gid/chroot 环境下，并监听不同的端口和使用不同的 php.ini 配置文件（可取代 safe_mode 的设置）；</li>
-<li>stdout 和 stderr 日志记录;</li>
-<li>在发生意外情况的时候能够重新启动并缓存被破坏的 opcode;</li>
-<li>文件上传优化支持;</li>
-<li>“慢日志”(slowlog) - 记录脚本（不仅记录文件名，还记录 PHP backtrace 信息，可以使用 ptrace或者类似工具读取和分析远程进程的运行数据）运行所导致的异常缓慢;</li>
-<li>fastcgi_finish_request() - 特殊功能：用于在请求完成和刷新数据后，继续在后台执行耗时的工作（录入视频转换、统计处理等）；</li>
-<li>动态／静态子进程产生；<br>基本 SAPI 运行状态信息（类似Apache的 mod_status）；</li>
-<li>基于 php.ini 的配置文件(在lnmp下通常是fastcgi.conf)。</li>
-</ul>
-<p>另外说一点,前两天看到一个面试题提到几个有趣的点.第一,fpm是一个进程池管理器(FastCGI pools,用官方的说法就是一个fastcgi池子),他可以配置多个进程池.第二,默认状态下fpm的默认端口是9000.</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://bapijun.github.io/2019/03/25/overview-for-fpm/" data-id="cju1a50z90000lsu0zl0g834u" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/网络/">网络</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
-
-
-  
-
 
 </section>
         
